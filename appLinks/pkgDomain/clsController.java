@@ -1,0 +1,24 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package pkgDomain;
+
+/**
+ *
+ * @author Acer3
+ */
+public class clsController {
+    private static clsController attInstance;
+    private clsController(){}
+    
+    public static clsController opGetInstance() {
+        if (attInstance == null)
+            attInstance = new clsController();
+        return attInstance;
+    } 
+    
+    //Comentario de Prueba
+    //otro comentario de prueba
+    //como estas 
+}
