@@ -8,35 +8,42 @@ package pkgServices;
  *
  * @author Acer3
  */
-public class clsEntity {
+public class clsEntity implements clsBrokerCrud.IIdentificable<String> {
     private String attOUID;
     private String attName;
     private String attDescription;
 
-    public clsEntity() {
+    protected clsEntity() {
+    }
+    
+    protected clsEntity(String prmOUID, String prmName, String prmDescription){
+        this.attOUID=prmOUID;
+        this.attName=prmName;
+        this.attDescription=prmDescription;
     }
 
-    public String opGetAttOUID() {
+    @Override
+    public String opGetOUID() {
         return attOUID;
     }
 
-    public void opSetAttOUID(String prmOUID) {
+    public void opSetOUID(String prmOUID) {
         this.attOUID = prmOUID;
     }
 
-    public String opGetAttName() {
+    public String opGetName() {
         return attName;
     }
 
-    public void opSetAttName(String prmName) {
+    public void opSetName(String prmName) {
         this.attName = prmName;
     }
 
-    public String opGetAttDescription() {
+    public String opGetDescription() {
         return attDescription;
     }
 
-    public void opSetAttDescription(String prmDescription) {
+    public void opSetDescription(String prmDescription) {
         this.attDescription = prmDescription;
     }
 }

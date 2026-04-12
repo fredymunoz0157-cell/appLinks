@@ -12,48 +12,32 @@ import java.util.ArrayList;
  * @param <T>
  */
 public class clsBrokerCrud<T extends clsEntity> {
-
-    private final ArrayList<T> clsListEntity;
-
-    public clsBrokerCrud() {
-        clsListEntity = new ArrayList<>();
-    }
-
-    public clsBrokerCrud(ArrayList<T> prmClsListEntity) {
-        clsListEntity = prmClsListEntity;
-    }
-
-    public Boolean opExistEntityWith(String prmOUID) {
-        for (int i = 0; i < clsListEntity.size(); i++) {
-            if (prmOUID.equals(clsListEntity.get(i).opGetAttOUID())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Boolean opAssociateExistEntityWith(T prmEntity) {
-        if (prmEntity != null) {
-            return false;
-        }
-        clsListEntity.add(prmEntity);
-        return true;
+    private clsBrokerCrud() {
+        throw new IllegalStateException("Clase de utilidades, no instanciar");
     }
     
-    public T opGetEntityWith(String prmOUID){
-        for (int i = 0; i < clsListEntity.size(); i++) {
-            if (prmOUID.equals(clsListEntity.get(i).opGetAttOUID())) {
-                return clsListEntity.get(i);
+    public interface IIdentificable<T> {
+        T opGetOUID();
+    }
+    
+    public static <OUIDType extends Comparable<OUIDType>, ItemType extends IIdentificable<OUIDType>> 
+           ItemType opGetItemType(OUIDType prmOUID, ArrayList<ItemType> prmCollection) {
+        
+        for (ItemType varObj : prmCollection) {
+            if (varObj.opGetOUID().compareTo(prmOUID) == 0) {
+                return varObj;
             }
         }
         return null;
     }
-    
-    public Boolean opDisassociateExistEntityWith(T prmEntity) {
-        if (prmEntity != null) {
-            return false;
-        }
-        clsListEntity.remove(prmEntity);
+           
+    public static <ItemType> Boolean opAssociateItemTo(ItemType prmItem, ArrayList<ItemType> prmCollection) {
+        prmCollection.add(prmItem); // En C# es Add(), en Java es add()
+        return true;
+    }
+
+    public static <ItemType> Boolean opDisassociateItemTo(ItemType prmItem, ArrayList<ItemType> prmCollection) {
+        prmCollection.remove(prmItem);
         return true;
     }
 }
